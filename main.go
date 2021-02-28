@@ -119,6 +119,7 @@ func main() {
   }
 }
 
+// displays the Help message, showing the version and how to use the program.
 func displayHelp() {
   fmt.Println("Gitsplit v1.0")
   fmt.Println("Just run git commands (add, init, ...)")
