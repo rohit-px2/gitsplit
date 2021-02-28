@@ -28,6 +28,11 @@ func main() {
 
 // displays the Help message, showing the version and how to use the program.
 func displayHelp() {
-  fmt.Println("Gitsplit v1.1")
-	fmt.Println("Just run git commands (add, init, ...)")
+  msg := 
+  `
+    GitSplit v1.1
+    Usage: gsp [commands]
+    Commands are git commands and are executed through git.
+  `
+  fmt.Print(msg)
 }
