@@ -1,116 +1,29 @@
 package split
 
 import (
-  "testing"
-  "github.com/stretchr/testify/assert"
+	"github.com/rohit-px2/gitsplit/src/constants"
+	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
-func TestSplit(t *testing.T) {
-  // copied from main.go file
-  commands := []string {
-    "config",
-    "help",
-    "bugreport",
-    "init",
-    "clone",
-    "add",
-    "status",
-    "diff",
-    "commit",
-    "notes",
-    "restore",
-    "reset",
-    "rm",
-    "mv",
-    "branch",
-    "checkout",
-    "switch",
-    "merge",
-    "mergetool",
-    "log",
-    "stash",
-    "tag",
-    "worktree",
-    "fetch",
-    "pull",
-    "push",
-    "remote",
-    "remote add",
-    "remote rename",
-    "remote get-url",
-    "remote set-url", 
-    "remote set-head",
-    "remote remove",
-    "remote set-branches",
-    "remote prune",
-    "submodule",
-    "show",
-    "log",
-    "diff",
-    "difftool",
-    "range-diff",
-    "shortlog",
-    "describe",
-    "apply",
-    "cherry-pick",
-    "rebase",
-    "revert",
-    "bisect",
-    "blame",
-    "grep",
-    "am",
-    "apply",
-    "format-patch",
-    "send-email",
-    "request-pull",
-    "svn",
-    "fast-import",
-    "clean",
-    "gc",
-    "fsck",
-    "reflog",
-    "filter-branch",
-    "instaweb",
-    "archive",
-    "bundle",
-    "daemon",
-    "update-server-info",
-    "cat-file",
-    "check-ignore",
-    "checkout-index",
-    "commit-tree",
-    "count-objects",
-    "diff-index",
-    "for-each-ref",
-    "hash-object",
-    "ls-files",
-    "ls-tree",
-    "merge-base",
-    "read-tree",
-    "rev-list",
-    "rev-parse",
-    "show-ref",
-    "symbolic-ref",
-    "update-index",
-    "update-ref",
-    "verify-pack",
-    "write-tree",
-  }
-  arguments := []string {
-    "init",
-    "add",
-    ".",
-    "remote",
-    "add",
-    "origin",
-    "https://github.com/rohit-px2/gitsplit.git",
-  }
-  expect := [][]string{
-    {"init"},
-    {"add", "."},
-    {"remote", "add", "origin", "https://github.com/rohit-px2/gitsplit.git"},
-  }
-  splits, err := SplitByCommands(arguments, commands)
-  assert.Nil(t, err)
-  assert.Equal(t, expect, splits, "they should be equal")
+func TestSplitByCommands(t *testing.T) {
+	// copied from main.go file
+	commands := constants.GetGitCommands()
+	arguments := []string{
+		"init",
+		"add",
+		".",
+		"remote",
+		"add",
+		"origin",
+		"https://github.com/rohit-px2/gitsplit.git",
+	}
+	expect := [][]string{
+		{"init"},
+		{"add", "."},
+		{"remote", "add", "origin", "https://github.com/rohit-px2/gitsplit.git"},
+	}
+	splits, err := SplitByCommands(arguments, commands)
+	assert.Nil(t, err)
+	assert.Equal(t, expect, splits, "they should be equal")
 }
