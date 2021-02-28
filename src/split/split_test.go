@@ -4,10 +4,12 @@ import (
 	"github.com/rohit-px2/gitsplit/src/constants"
 	"github.com/stretchr/testify/assert"
 	"testing"
+  "strings"
 )
 
+// Testing git commands and seeing whether SplitByCommands
+// splits them appropriately
 func TestSplitByCommands(t *testing.T) {
-	// copied from main.go file
 	commands := constants.GetGitCommands()
 	arguments := []string{
 		"init",
@@ -26,4 +28,16 @@ func TestSplitByCommands(t *testing.T) {
 	splits, err := SplitByCommands(arguments, commands)
 	assert.Nil(t, err)
 	assert.Equal(t, expect, splits, "they should be equal")
+  
+  command := "add . commit -m \"Hello World\" push origin main"
+  arguments = strings.Split(command,  " ")
+  expect = [][]string {
+    {"add", "."},
+    {"commit", "-m", "\"Hello", "World\""},
+    {"push", "origin", "main"},
+  }
+
+  splits, err = SplitByCommands(arguments, commands)
+  assert.Nil(t, err)
+  assert.Equal(t, expect, splits, "commit comments should be an escaped string")
 }
