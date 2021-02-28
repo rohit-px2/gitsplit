@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"time"
-
 	"github.com/rohit-px2/gitsplit/src/split"
+  "github.com/rohit-px2/gitsplit/src/executor"
 )
 
 // A list of every Git command
@@ -113,11 +112,10 @@ func main() {
   }
   // Commands are split into git commands.
   // We can chain the commands by adding "git" before each of them
-  // and adding "&&" to the end of them (except for the last command)
-  res := fmt.Sprintf("Length: %d\n", len(splits))
-  fmt.Println(res)
-  for i := 0; i < len(splits); i++ {
-    fmt.Println(splits[i])
+  progName := "git"
+  err = executor.Execute(progName, splits)
+  if err != nil {
+    log.Fatal(err)
   }
 }
 

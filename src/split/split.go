@@ -49,7 +49,6 @@ func SplitByCommands(args []string, commands []string) ([][]string, error) {
 
     if i == numArgs-1 {
       totalSplit = append(totalSplit, currentSplit)
-      currentSplit = nil
     }
   }
   return totalSplit, nil

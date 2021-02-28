@@ -1,8 +1,7 @@
-package test
+package split
 
 import (
   "testing"
-  "github.com/rohit-px2/gitsplit/src/split"
   "github.com/stretchr/testify/assert"
 )
 
@@ -107,11 +106,11 @@ func TestSplit(t *testing.T) {
     "https://github.com/rohit-px2/gitsplit.git",
   }
   expect := [][]string{
-    []string {"init"},
-    []string {"add", "."},
-    []string {"remote", "add", "origin", "https://github.com/rohit-px2/gitsplit.git"},
+    {"init"},
+    {"add", "."},
+    {"remote", "add", "origin", "https://github.com/rohit-px2/gitsplit.git"},
   }
-  splits, err := split.SplitByCommands(arguments, commands)
-  assert.NotNil(t, err)
+  splits, err := SplitByCommands(arguments, commands)
+  assert.Nil(t, err)
   assert.Equal(t, expect, splits, "they should be equal")
 }
