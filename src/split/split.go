@@ -36,9 +36,13 @@ func SplitByCommands(args []string, commands []string) ([][]string, error) {
     if len(currentSplit) > 0 && containsString(commands, currentSplit[0] + " " + args[i]) {
       currentSplit = append(currentSplit, args[i])
     } else if containsString(commands, args[i]) {
-      totalSplit = append(totalSplit, currentSplit)
-      currentSplit = nil
-      currentSplit = append(currentSplit, args[i])
+      if i == 0 {
+        currentSplit = append(currentSplit, args[i])
+      } else {
+        totalSplit = append(totalSplit, currentSplit)
+        currentSplit = nil
+        currentSplit = append(currentSplit, args[i])
+      }
     } else {
       currentSplit = append(currentSplit, args[i])
     }

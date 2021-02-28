@@ -111,7 +111,7 @@ func TestSplit(t *testing.T) {
     []string {"add", "."},
     []string {"remote", "add", "origin", "https://github.com/rohit-px2/gitsplit.git"},
   }
-  split, err := split.SplitByCommands(arguments, commands)
+  splits, err := split.SplitByCommands(arguments, commands)
   assert.NotNil(t, err)
-  assert.Equal(t, expect, split, "they should be equal")
+  assert.Equal(t, expect, splits, "they should be equal")
 }
