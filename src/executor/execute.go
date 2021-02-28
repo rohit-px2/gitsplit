@@ -27,8 +27,8 @@ func Execute(procname string, commands [][]string) error {
   return nil
 }
 
-// Executable returns 'true' if a command-line command can be executed.
-func Executable(procname string) bool {
+// IsExecutable returns 'true' if a command-line command can be executed.
+func IsExecutable(procname string) bool {
   _, err := exec.LookPath(procname)
   return err == nil
 }
