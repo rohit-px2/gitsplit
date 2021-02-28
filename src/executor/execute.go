@@ -13,7 +13,7 @@ import (
 // an error.
 // Execute also prints the output of each command to stdout.
 // Requirements:
-// procname musut be callable from the command line.
+// procname must be callable from the command line.
 // If a command produces an error then it will be returned from Execute.
 func Execute(procname string, commands [][]string) error {
   for _, command := range commands {
