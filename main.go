@@ -3,13 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/rohit-px2/gitsplit/src/constants"
-	"github.com/rohit-px2/gitsplit/src/executor"
+  "github.com/rohit-px2/gitsplit/src/errors"
+  "github.com/rohit-px2/gitsplit/src/executor"
 	"github.com/rohit-px2/gitsplit/src/split"
-	"log"
 	"os"
 )
-
-// A list of every Git command (hopefully)
 
 func main() {
 	args := os.Args[1:]
@@ -20,20 +18,16 @@ func main() {
 	}
 	commands := constants.GetGitCommands()
 	splits, err := split.SplitByCommands(args, commands)
-	if err != nil {
-		log.Fatal(err)
-	}
+  errors.CheckFatal(err)
 	// Commands are split into git commands.
 	// We can chain the commands by adding "git" before each of them
 	progName := "git"
-	err = executor.Execute(progName, splits)
-	if err != nil {
-		log.Fatal(err)
-	}
+  err = executor.Execute(progName, splits)
+  errors.CheckFatal(err)
 }
 
 // displays the Help message, showing the version and how to use the program.
 func displayHelp() {
-	fmt.Println("Gitsplit v1.0")
+  fmt.Println("Gitsplit v1.1")
 	fmt.Println("Just run git commands (add, init, ...)")
 }
