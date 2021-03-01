@@ -1,27 +1,27 @@
 package main
 
 import (
-	"fmt"
-	"github.com/rohit-px2/gitsplit/src/constants"
+  "fmt"
+  "github.com/rohit-px2/gitsplit/src/constants"
   "github.com/rohit-px2/gitsplit/src/errors"
   "github.com/rohit-px2/gitsplit/src/executor"
-	"github.com/rohit-px2/gitsplit/src/split"
-	"os"
+  "github.com/rohit-px2/gitsplit/src/split"
+  "os"
 )
 
 func main() {
-	args := os.Args[1:]
-	// Display help message if there are no arguments
-	if len(args) < 1 {
-		displayHelp()
-		os.Exit(0)
-	}
-	commands := constants.GetGitCommands()
-	splits, err := split.SplitByCommands(args, commands)
+  args := os.Args[1:]
+  // Display help message if there are no arguments
+  if len(args) < 1 {
+    displayHelp()
+    os.Exit(0)
+  }
+  commands := constants.GetGitCommands()
+  splits, err := split.SplitByCommands(args, commands)
   errors.CheckLogFatal(err)
-	// Commands are split into git commands.
-	// We can chain the commands by adding "git" before each of them
-	progName := "git"
+  // Commands are split into git commands.
+  // We can chain the commands by adding "git" before each of them
+  progName := "git"
   if !executor.IsExecutable(progName) {
     displayInstallGitMessage()
     os.Exit(0)
