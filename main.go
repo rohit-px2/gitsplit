@@ -12,11 +12,7 @@ import (
 func main() {
 	args := os.Args[1:]
 	// Display help message if there are no arguments
-	if len(args) < 1 {
-		displayHelp()
-	} else if len(args) == 1 && args[0] == "-v" {
-		displayHelp()
-	}
+  parseOpts(args)
 	commands := constants.GetGitCommands()
 	splits, err := split.SplitByCommands(args, commands)
 	errors.CheckLogFatal(err)
@@ -30,13 +26,25 @@ func main() {
 	executor.Execute(progName, splits)
 }
 
+// parseOpts determines which options the user specified and performs
+// the corresponding action.
+// NOTE: gsp should not override git flags
+func parseOpts(args []string) {
+  if len(args) < 1 {
+    displayHelp()
+  } else if len(args) == 1 && args[0] == "-v" {
+    displayHelp()
+  }
+}
+
 // displays the Help message, showing the version and how to use the program.
 func displayHelp() {
 	msg :=
 		`
 GitSplit v1.1
-Usage: gsp [-v] <command> [<args>]
+Usage: gsp [-v] [<command> [<args>]]
 <command> represents a git command, and is passed to git with <args>.
+You can pass in multiple git commands and give arguments to each command.
 
 Example:
 gsp init add . commit -m "initial commit"
