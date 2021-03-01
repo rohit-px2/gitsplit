@@ -10,6 +10,7 @@ import (
 // Testing git commands and seeing whether SplitByCommands
 // splits them appropriately
 func TestSplitByCommands(t *testing.T) {
+  // Test 1
 	commands := constants.GetGitCommands()
 	arguments := []string{
 		"init",
@@ -28,7 +29,7 @@ func TestSplitByCommands(t *testing.T) {
 	splits, err := SplitByCommands(arguments, commands)
 	assert.Nil(t, err)
 	assert.Equal(t, expect, splits, "they should be equal")
-  
+  // Test 2
   command := "add . commit -m \"Hello World\" push origin main"
   arguments = strings.Split(command,  " ")
   expect = [][]string {
