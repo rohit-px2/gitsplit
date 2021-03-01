@@ -4,6 +4,7 @@ package executor
 import (
 	"os"
 	"os/exec"
+	"github.com/rohit-px2/gitsplit/src/errors"
 )
 
 // Execute runs each command in commands as a system command
@@ -15,16 +16,17 @@ import (
 // Requirements:
 // procname must be callable from the command line.
 // If a command produces an error then it will be returned from Execute.
-func Execute(procname string, commands [][]string) error {
+func Execute(procname string, commands [][]string) {
   for _, command := range commands {
     cmd := exec.Command(procname, command...)
     // Pipe output & input to terminal
     cmd.Stdin = os.Stdin
     cmd.Stdout = os.Stdout
     cmd.Stderr = os.Stderr
-    cmd.Run()
+    err := cmd.Run()
+    // Terminate if git gives us an error.
+    errors.CheckExitFatal(err)
   }
-  return nil
 }
 
 // IsExecutable returns 'true' if a command-line command can be executed.

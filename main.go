@@ -18,7 +18,7 @@ func main() {
 	}
 	commands := constants.GetGitCommands()
 	splits, err := split.SplitByCommands(args, commands)
-  errors.CheckFatal(err)
+  errors.CheckLogFatal(err)
 	// Commands are split into git commands.
 	// We can chain the commands by adding "git" before each of them
 	progName := "git"
@@ -26,8 +26,7 @@ func main() {
     displayInstallGitMessage()
     os.Exit(0)
   }
-  err = executor.Execute(progName, splits)
-  errors.CheckFatal(err)
+  executor.Execute(progName, splits)
 }
 
 // displays the Help message, showing the version and how to use the program.
