@@ -1,5 +1,4 @@
-// Package split ...
-// This package contains a function / series of functions
+// Package split contains a function / series of functions
 // to split command-line arguments by a list of specified strings.
 // Since this is within a git-command context, we need to keep track
 // of context.

@@ -35,10 +35,8 @@ func displayHelp() {
 	msg :=
 		`
 GitSplit v1.1
-Usage: gsp [commands]
-Commands are git commands and are executed through git.
-Inputting multiple commands acts the same as if you were to put "&&" between
-each command.
+Usage: gsp [-v] <command> [<args>]
+<command> represents a git command, and is passed to git with <args>.
 
 Example:
 gsp init add . commit -m "initial commit"
