@@ -54,8 +54,9 @@ https://git-scm.com/docs.
 func displayInstallGitMessage() {
   msg :=
   `
+ERROR:
 It appears that you do not have Git installed. Git is needed to run GitSplit.
-You can download git from git-scm.com.
+You can download git from https://git-scm.com.
   `
   fmt.Print(msg)
 }
