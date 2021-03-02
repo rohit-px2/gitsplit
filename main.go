@@ -2,17 +2,23 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/rohit-px2/gitsplit/src/constants"
 	"github.com/rohit-px2/gitsplit/src/errors"
 	"github.com/rohit-px2/gitsplit/src/executor"
+	"github.com/rohit-px2/gitsplit/src/gitconfig"
 	"github.com/rohit-px2/gitsplit/src/split"
-	"os"
 )
 
 func main() {
 	args := os.Args[1:]
 	// Display help message if there are no arguments
-  parseOpts(args)
+	parseOpts(args)
+	const aliasRegex = `^alias\.`
+	conf := gitconfig.GetAllMatching(aliasRegex)
+  fmt.Print(conf)
+	// If we have an error we continue with no alias variables
 	commands := constants.GetGitCommands()
 	splits, err := split.SplitByCommands(args, commands)
 	errors.CheckLogFatal(err)
@@ -30,11 +36,11 @@ func main() {
 // the corresponding action.
 // NOTE: gsp should not override git flags
 func parseOpts(args []string) {
-  if len(args) < 1 {
-    displayHelp()
-  } else if len(args) == 1 && args[0] == "-v" {
-    displayHelp()
-  }
+	if len(args) < 1 {
+		displayHelp()
+	} else if len(args) == 1 && args[0] == "-v" {
+		displayHelp()
+	}
 }
 
 // displays the Help message, showing the version and how to use the program.
