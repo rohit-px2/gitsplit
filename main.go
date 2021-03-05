@@ -15,12 +15,12 @@ func main() {
 	args := os.Args[1:]
 	// Display help message if there are no arguments
 	parseOpts(args)
-	const aliasRegex = `^alias\.`
-	conf := gitconfig.GetAllMatching(aliasRegex)
-  fmt.Print(conf)
+	const aliasRegex = `^alias\.` // Regex match for "alias" config vars
+  const aliasStart = "alias." // What to trim from the start of the config vars
+	conf := gitconfig.GetAllMatching(aliasRegex, aliasStart)
 	// If we have an error we continue with no alias variables
 	commands := constants.GetGitCommands()
-	splits, err := split.SplitByCommands(args, commands)
+	splits, err := split.SplitByCommands(args, commands, conf)
 	errors.CheckLogFatal(err)
 	// Commands are split into git commands.
 	// We can chain the commands by adding "git" before each of them
@@ -29,7 +29,7 @@ func main() {
 		displayInstallGitMessage()
 		os.Exit(0)
 	}
-	executor.Execute(progName, splits)
+  executor.Execute(progName, splits)
 }
 
 // parseOpts determines which options the user specified and performs

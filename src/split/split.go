@@ -7,7 +7,12 @@
 // before "add".
 package split
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/rohit-px2/gitsplit/src/gitconfig"
+)
+
 // SplitByCommands splits args according to the
 // given commands.
 // Requirements:
@@ -19,7 +24,12 @@ import "errors"
 // that fits the command better (ex. "remote add" vs "add").
 // 3. If the argument is not a command, add it to the current command we are
 // processing (it's part of a command).
-func SplitByCommands(args []string, commands []string) ([][]string, error) {
+func SplitByCommands(
+  args      []string,
+  commands  []string,
+  config    map[string] []string,
+) ([][]string, error) {
+  args = gitconfig.Expand(args, config)
   numArgs := len(args)
   if numArgs <= 0 {
     return nil, errors.New("args must have at least one item")
@@ -62,4 +72,17 @@ func containsString(arr []string, s string) bool {
     }
   }
   return false
+}
+
+func add(arr []string, elem string, index int) []string{
+  if len(arr) == index {
+    return append(arr, elem)
+  }
+  arr = append(arr[:index+1], arr[index:]...)
+  arr[index] = elem
+  return arr
+}
+
+func removeIndex(arr []string, index int) []string{
+  return append(arr[:index], arr[index+1:]...)
 }
