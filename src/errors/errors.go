@@ -1,5 +1,5 @@
-// Package errors provides some functions for handling errors.
-package errors
+// Package errhandler provides some functions for handling errors.
+package errhandler
 
 import (
 	"log"

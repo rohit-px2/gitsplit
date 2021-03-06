@@ -20,8 +20,8 @@ func main() {
 	conf := gitconfig.GetAllMatching(aliasRegex, aliasStart)
 	// If we have an error we continue with no alias variables
 	commands := constants.GetGitCommands()
-	splits, err := split.SplitByCommands(args, commands, conf)
-	errors.CheckLogFatal(err)
+	splits, err := split.ByCommands(args, commands, conf)
+	errhandler.CheckLogFatal(err)
 	// Commands are split into git commands.
 	// We can chain the commands by adding "git" before each of them
 	progName := "git"

@@ -26,7 +26,7 @@ func Execute(procname string, commands [][]string) {
 		cmd.Stderr = os.Stderr
 		err := cmd.Run()
 		// Terminate if git gives us an error.
-		errors.CheckExitFatal(err)
+		errhandler.CheckExitFatal(err)
 	}
 }
 

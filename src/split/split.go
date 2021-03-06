@@ -13,7 +13,7 @@ import (
 	"github.com/rohit-px2/gitsplit/src/gitconfig"
 )
 
-// SplitByCommands splits args according to the
+// ByCommands splits args according to the
 // given commands.
 // Requirements:
 // len(args) > 0
@@ -24,7 +24,7 @@ import (
 // that fits the command better (ex. "remote add" vs "add").
 // 3. If the argument is not a command, add it to the current command we are
 // processing (it's part of a command).
-func SplitByCommands(
+func ByCommands(
   args      []string,
   commands  []string,
   config    map[string] []string,
@@ -65,8 +65,7 @@ func SplitByCommands(
 
 // containsString(arr, s) returns 'true' if s is an element of arr.
 func containsString(arr []string, s string) bool {
-  len := len(arr)
-  for i := 0; i < len; i++ {
+  for i := 0; i < len(arr); i++ {
     if arr[i] == s {
       return true
     }
@@ -74,13 +73,16 @@ func containsString(arr []string, s string) bool {
   return false
 }
 
-func add(arr []string, elem string, index int) []string{
-  if len(arr) == index {
-    return append(arr, elem)
+func add(arr []string, elem string, index int) ([]string, error) {
+	size := len(arr)
+	if index > size {
+		return arr, errors.New("index out of bounds")
+	} else if size == index {
+    return append(arr, elem), nil
   }
   arr = append(arr[:index+1], arr[index:]...)
   arr[index] = elem
-  return arr
+  return arr, nil
 }
 
 func removeIndex(arr []string, index int) []string{
