@@ -51,8 +51,8 @@ func TestSplitByCommands(t *testing.T) {
   arguments = strings.Split(command, " ")
   expect = [][]string {
     {"add", "."},
-    {"com", "-m", "\"testing...", "\""},
-    {"unstage", "file.txt"},
+    {"commit", "-m", "\"testing..", "\""},
+    {"reset", "HEAD", "--", "file.txt"},
   }
   splits, err = SplitByCommands(arguments, commands, config)
   assert.Nil(t, err)
