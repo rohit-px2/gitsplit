@@ -59,7 +59,6 @@ func TestSplitByCommands(t *testing.T) {
   splits, err = ByCommands(arguments, commands, config)
   assert.Nil(t, err)
   assert.Equal(t, expect, splits, "config vars should be recognized")
-
 }
 
 func TestAdding(t *testing.T) {

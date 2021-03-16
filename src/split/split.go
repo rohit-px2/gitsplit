@@ -36,24 +36,24 @@ func ByCommands(
   }
   totalSplit := make([][]string, 0)
   currentSplit := make([]string, 0)
-  
-  for i := 0; i < numArgs; i++ {
+
+	for i, elem := range args {
     // Check if we have a longer match (e.g. "remote add")
     // "remote" would be in commands[0]
     // We check if currentSplit's length is greater than 0
-    // and if currentSplit[0] + " " + args[i] is a command.
-    if len(currentSplit) > 0 && containsString(commands, currentSplit[0] + " " + args[i]) {
-      currentSplit = append(currentSplit, args[i])
-    } else if containsString(commands, args[i]) {
+    // and if currentSplit[0] + " " + elem is a command.
+    if len(currentSplit) > 0 && containsString(commands, currentSplit[0] + " " + elem) {
+      currentSplit = append(currentSplit, elem)
+    } else if containsString(commands, elem) {
       if i == 0 {
-        currentSplit = append(currentSplit, args[i])
+        currentSplit = append(currentSplit, elem)
       } else {
         totalSplit = append(totalSplit, currentSplit)
         currentSplit = nil
-        currentSplit = append(currentSplit, args[i])
+        currentSplit = append(currentSplit, elem)
       }
     } else {
-      currentSplit = append(currentSplit, args[i])
+      currentSplit = append(currentSplit, elem)
     }
 
     if i == numArgs-1 {
@@ -65,12 +65,12 @@ func ByCommands(
 
 // containsString(arr, s) returns 'true' if s is an element of arr.
 func containsString(arr []string, s string) bool {
-  for i := 0; i < len(arr); i++ {
-    if arr[i] == s {
-      return true
-    }
-  }
-  return false
+	for _, str := range arr {
+		if str == s {
+			return true
+		}
+	}
+	return false
 }
 
 func add(arr []string, elem string, index int) ([]string, error) {
