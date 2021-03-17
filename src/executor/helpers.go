@@ -12,8 +12,8 @@ func printError(procname string, command []string, err string) {
 	fmt.Println("gsp failed at the following command:")
 	// Make the command into a better-looking string
 	s := procname + " "
-	for i := 0; i < len(command); i++ {
-		s += command[i] + " "
+	for _, elem := range command {
+		s += elem + " "
 	}
 	fmt.Println(s)
 	fmt.Println("Received message from stderr:")
@@ -27,8 +27,8 @@ func printError(procname string, command []string, err string) {
 func commandToString(procname string, command []string) string {
 	s := procname + " "
 	len := len(command)
-	for i := 0; i < len-1; i++ {
-		s += command[i] + " "
+	for _, elem := range command {
+		s += elem + " "
 	}
 	s += command[len-1]
 	return s

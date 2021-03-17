@@ -67,12 +67,11 @@ func GetAllMatching(regex string, trim string) map[string] []string {
 // git aliases are.
 func Expand(list []string, config map[string] []string) []string {
   current := make([]string, 0, 10)
-	n := len(list)
-  for i := 0; i < n; i++ {
-    if isAlias, expanded := IsAlias(config, list[i]); isAlias {
+	for _, elem := range list {
+    if isAlias, expanded := IsAlias(config, elem); isAlias {
       current = append(current, expanded...)
     } else {
-      current = append(current, list[i])
+      current = append(current, elem)
     }
   }
   return current
