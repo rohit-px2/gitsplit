@@ -62,7 +62,8 @@ https://git-scm.com/docs.
 	os.Exit(0)
 }
 
-// displayInstallGitMessage does what the name says it does
+// displayInstallGitMessage displays a message to install Git when it is not detected
+// on the user's computer
 func displayInstallGitMessage() {
 	msg :=
 		`

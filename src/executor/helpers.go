@@ -26,10 +26,10 @@ func printError(procname string, command []string, err string) {
 // comandToString is procname.
 func commandToString(procname string, command []string) string {
 	s := procname + " "
-	len := len(command)
+	n := len(command)
 	for _, elem := range command {
 		s += elem + " "
 	}
-	s += command[len-1]
+	s += command[n-1]
 	return s
 }
