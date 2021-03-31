@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/rohit-px2/gitsplit/src/errors"
+	errhandler "github.com/rohit-px2/gitsplit/src/errors"
 )
 
 // Execute runs each command in commands as a system command

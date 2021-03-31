@@ -15,10 +15,10 @@ func GetAliases() map[string][]string {
 	return GetAllMatching(aliasRegex, aliasStart)
 }
 
-// GetAllMatching gets all git config variables that match the given regex.
-// These results are stored as an array of strings, where the element at each
-// even-numbered index (0, 2, ...) is a configuration variable and the value
-// to the index to the right of it is the configuration variable's value.
+// GetAllMatching returns a map of git config variables to their values.
+// All config variables which match the given regex are stored in the map
+// and have "trim" trimmed from their prefix (an empty string can be passed
+// in to disable the trimming).
 func GetAllMatching(regex string, trim string) map[string][]string {
 	var stdout bytes.Buffer
 	cmd := exec.Command("git", "config", "--get-regexp", regex)

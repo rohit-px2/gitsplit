@@ -2,6 +2,7 @@ package executor
 
 import (
 	"fmt"
+	"strings"
 )
 
 // printError prints the error with the information given.
@@ -25,11 +26,13 @@ func printError(procname string, command []string, err string) {
 // separated by whitespace). The first word in the value returned by
 // comandToString is procname.
 func commandToString(procname string, command []string) string {
-	s := procname + " "
-	n := len(command)
+	var sb strings.Builder
+	sb.WriteString(procname)
+	sb.WriteString(" ")
 	for _, elem := range command {
-		s += elem + " "
+		sb.WriteString(elem)
+		sb.WriteString(" ")
 	}
-	s += command[n-1]
-	return s
+	sb.WriteString(command[len(command)-1])
+	return sb.String()
 }

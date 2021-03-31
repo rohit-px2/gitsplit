@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/rohit-px2/gitsplit/src/constants"
-	"github.com/rohit-px2/gitsplit/src/errors"
+	errhandler "github.com/rohit-px2/gitsplit/src/errors"
 	"github.com/rohit-px2/gitsplit/src/executor"
 	"github.com/rohit-px2/gitsplit/src/gitconfig"
 	"github.com/rohit-px2/gitsplit/src/split"
@@ -72,4 +72,5 @@ It appears that you do not have Git installed. Git is needed to run GitSplit.
 You can download git from https://git-scm.com.
   `
 	fmt.Print(msg)
+	os.Exit(0)
 }
