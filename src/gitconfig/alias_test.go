@@ -1,8 +1,9 @@
 package gitconfig
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestExpand(t *testing.T) {
